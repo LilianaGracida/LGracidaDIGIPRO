@@ -13,7 +13,7 @@ namespace BL
             ML.Result result = new ML.Result();
             try
             {
-                using (DL.LGracidaDIGIPROEntities context = new DL.LGracidaDIGIPROEntities())
+                using (DL.LGracidaDIGIPROEntities1 context = new DL.LGracidaDIGIPROEntities1())
                 {
                     var query = context.MateriaAdd(materia.Nombre, materia.Costo);
 
@@ -42,7 +42,7 @@ namespace BL
             ML.Result result = new ML.Result();
             try
             {
-                using (DL.LGracidaDIGIPROEntities context = new DL.LGracidaDIGIPROEntities())
+                using (DL.LGracidaDIGIPROEntities1 context = new DL.LGracidaDIGIPROEntities1())
                 {
                     var query = context.MateriaUpdate(materia.IdMateria, materia.Nombre, materia.Costo);
 
@@ -71,7 +71,7 @@ namespace BL
             ML.Result result = new ML.Result();
             try
             {
-                using (DL.LGracidaDIGIPROEntities context = new DL.LGracidaDIGIPROEntities())
+                using (DL.LGracidaDIGIPROEntities1 context = new DL.LGracidaDIGIPROEntities1())
                 {
                     var query = context.MateriaDelete(materia.IdMateria);
 
@@ -100,7 +100,7 @@ namespace BL
             ML.Result result = new ML.Result();
             try
             {
-                using (DL.LGracidaDIGIPROEntities context = new DL.LGracidaDIGIPROEntities())
+                using (DL.LGracidaDIGIPROEntities1 context = new DL.LGracidaDIGIPROEntities1())
                 {
                     var obj = context.MateriaGetById(IdMateria).FirstOrDefault();
                     result.Objects = new List<object>();
@@ -108,7 +108,7 @@ namespace BL
                     if (obj != null)
                     {
                         ML.Materia materia = new ML.Materia();
-                        materia.IdMateria = obj.IdMateria;
+                        materia.IdMateria = obj.Idmateria;
                         materia.Nombre = obj.Nombre;
                         materia.Costo = obj.Costo.Value;
 
@@ -138,7 +138,7 @@ namespace BL
             ML.Result result = new ML.Result();
             try
             {
-                using (DL.LGracidaDIGIPROEntities context = new DL.LGracidaDIGIPROEntities())
+                using (DL.LGracidaDIGIPROEntities1 context = new DL.LGracidaDIGIPROEntities1())
                 {
                     var materias = context.MateriaGetAll().ToList();
                     result.Objects = new List<object>();
@@ -147,7 +147,7 @@ namespace BL
                         foreach (var obj in materias)
                         {
                             ML.Materia materia = new ML.Materia();
-                            materia.IdMateria = obj.IdMateria;
+                            materia.IdMateria = obj.Idmateria;
                             materia.Nombre = obj.Nombre;
                             materia.Costo = obj.Costo.Value;
 

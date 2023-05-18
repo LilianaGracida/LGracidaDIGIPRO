@@ -82,7 +82,7 @@
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Costo" Type="Decimal" Precision="18" Scale="0" />
         </EntityType>
-        <EntityContainer Name="LGracidaDIGIPROEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="LGracidaDIGIPROEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Alumnoes" EntityType="Self.Alumno" />
           <EntitySet Name="Materias" EntityType="Self.Materia" />
           <FunctionImport Name="AlumnoAdd">
@@ -147,7 +147,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="LGracidaDIGIPROModelStoreContainer" CdmEntityContainer="LGracidaDIGIPROEntities">
+        <EntityContainerMapping StorageEntityContainer="LGracidaDIGIPROModelStoreContainer" CdmEntityContainer="LGracidaDIGIPROEntities1">
           <EntitySetMapping Name="Alumnoes">
             <EntityTypeMapping TypeName="LGracidaDIGIPROModel.Alumno">
               <MappingFragment StoreEntitySet="Alumno">

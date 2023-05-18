@@ -15,10 +15,10 @@ namespace DL
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class LGracidaDIGIPROEntities : DbContext
+    public partial class LGracidaDIGIPROEntities1 : DbContext
     {
-        public LGracidaDIGIPROEntities()
-            : base("name=LGracidaDIGIPROEntities")
+        public LGracidaDIGIPROEntities1()
+            : base("name=LGracidaDIGIPROEntities1")
         {
         }
     
