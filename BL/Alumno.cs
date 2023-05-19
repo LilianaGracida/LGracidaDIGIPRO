@@ -115,57 +115,54 @@ namespace BL
 
             return result;
         }
-        public static ML.Result GetById(int idAlumno)
+        public static ML.Result GetById(int IdAlumno)
         {
             ML.Result result = new ML.Result();
+
             try
             {
                 using (SqlConnection context = new SqlConnection(DL.Conexion.GetConnectionString()))
                 {
-                    string query = "AlumnoGetById";
+                    string query = ("AlumnoGetById");
 
                     using (SqlCommand cmd = new SqlCommand())
                     {
-
-                        cmd.CommandText = query;
                         cmd.Connection = context;
+                        cmd.CommandText = query;
                         cmd.CommandType = CommandType.StoredProcedure;
 
                         SqlParameter[] collection = new SqlParameter[1];
 
                         collection[0] = new SqlParameter("IdAlumno", SqlDbType.Int);
-                        collection[0].Value = idAlumno;
-
+                        collection[0].Value = IdAlumno;
 
                         cmd.Parameters.AddRange(collection);
+                        cmd.Connection.Open();
 
-                        DataTable tableMateria = new DataTable();
-                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        DataTable tableAlumno = new DataTable();
+
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+                        da.Fill(tableAlumno);
+
+                        if (tableAlumno.Rows.Count > 0)
                         {
+                            DataRow row = tableAlumno.Rows[0];
 
-                            da.Fill(tableMateria);
+                            ML.Alumno alumno = new ML.Alumno();
 
-                            
-                            if (tableMateria.Rows.Count > 0)
-                            {
-                                DataRow row = tableMateria.Rows[0];
+                            alumno.IdAlumno = int.Parse(row[0].ToString());
+                            alumno.Nombre = row[1].ToString();
+                            alumno.ApellidoPaterno = row[2].ToString();
+                            alumno.ApellidoMaterno = row[3].ToString();
 
-
-                                ML.Alumno alumno = new ML.Alumno();
-                                alumno.IdAlumno = int.Parse(row[0].ToString());
-                                alumno.Nombre= row[1].ToString();
-                                alumno.ApellidoPaterno= row[2].ToString();
-                                alumno.ApellidoMaterno= row[3].ToString();
-
-                                result.Object = result; //boxing
-
-                                result.Correct = true;
-                            }
-                            else
-                            {
-                                result.Correct = false;
-                                result.ErrorMessage = "No existen registros sobre la tabla Alumno";
-                            }
+                            result.Object = alumno;
+                            result.Correct = true;
+                        }
+                        else
+                        {
+                            result.Correct = false;
+                            result.ErrorMessage = " No existen registros en la tabla";
                         }
                     }
                 }
@@ -176,6 +173,7 @@ namespace BL
                 result.ErrorMessage = ex.Message;
                 result.Ex = ex;
             }
+
             return result;
         }
         public static ML.Result Update(ML.Alumno alumno)

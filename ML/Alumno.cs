@@ -13,5 +13,10 @@ namespace ML
         public string ApellidoPaterno { get; set; }
         public string ApellidoMaterno { get; set; }
         public List<object> Alumnos { get; set; }
+
+        public static explicit operator Alumno(List<object> v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -21,7 +21,7 @@ namespace BL
                     {
                         foreach (var obj in alumnos)
                         {
-                            ML.Alumno alumno= new ML.Alumno();
+                            ML.Alumno alumno = new ML.Alumno();
                             alumno.IdAlumno = obj.IdAlumno;
                             alumno.Nombre = obj.Nombre;
                             alumno.ApellidoPaterno = obj.ApellidoPaterno;
@@ -48,27 +48,32 @@ namespace BL
             return result;
         }
 
-        public static ML.Result GetMateriaAsignada(int idAlumno)
+        public static ML.Result GetMateriaAsignada(int IdAlumno)
         {
             ML.Result result = new ML.Result();
             try
             {
                 using (DL.LGracidaDIGIPROEntities1 context = new DL.LGracidaDIGIPROEntities1())
                 {
-                    var obj = context.AlumnoGetMateriaAsignada(idAlumno).FirstOrDefault();
+                    var query = context.AlumnoGetMateriaAsignada(IdAlumno).ToList();
                     result.Objects = new List<object>();
 
-                    if (obj != null)
+                    if (query != null)
                     {
-                        ML.AlumnoMateria alumnoMateria = new ML.AlumnoMateria();
-                        alumnoMateria.IdAlumnoMateria = obj.IdAlumnoMateria;
+                        foreach (var obj in query)
+                        {
+                            ML.AlumnoMateria alumnomateria = new ML.AlumnoMateria();
+                            alumnomateria.IdAlumnoMateria = obj.IdAlumnoMateria;
 
-                        ML.Materia materia = new ML.Materia();
-                        alumnoMateria.materia.IdMateria = obj.IdMateria;
-                        alumnoMateria.materia.Nombre = obj.Nombre;
-                        
-                        result.Object = alumnoMateria;
-                        result.Correct = true;
+                            alumnomateria.materia = new ML.Materia();
+                            alumnomateria.materia.Nombre = obj.Nombre;
+
+                            alumnomateria.alumno = new ML.Alumno();
+                            alumnomateria.alumno.IdAlumno = obj.IdAlumno;
+
+                            result.Objects.Add(alumnomateria);
+                            result.Correct = true;
+                        }
 
                     }
                     else
@@ -80,6 +85,107 @@ namespace BL
                 }
             }
 
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ErrorMessage = ex.Message;
+                result.Ex = ex;
+            }
+            return result;
+        }
+
+        public static ML.Result Delete(ML.AlumnoMateria alumnomateria)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (DL.LGracidaDIGIPROEntities1 context = new DL.LGracidaDIGIPROEntities1())
+                {
+                    var query = context.AlumnoMateriaDelete(alumnomateria.IdAlumnoMateria);
+
+                    if (query >= 0)
+                    {
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                        result.ErrorMessage = "No se ha podido realizar el delete";
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ErrorMessage = ex.Message;
+            }
+            return result;
+        }
+
+        public static ML.Result Add(ML.AlumnoMateria alumnomateria)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (DL.LGracidaDIGIPROEntities1 context = new DL.LGracidaDIGIPROEntities1())
+                {
+                    var query = context.AlumnoMateriaAdd(alumnomateria.alumno.IdAlumno, alumnomateria.materia.IdMateria);
+                    {
+                        if (query >= 1)
+                        {
+                            result.Correct = true;
+                        }
+                        else
+                        {
+                            result.Correct = false;
+                            result.ErrorMessage = "No se ha podido realizar el insert";
+                        }
+                        result.Correct = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ErrorMessage = ex.Message;
+            }
+            return result;
+        }
+
+        public static ML.Result GetMateriaNoAsiganda(int IdAlumno)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (DL.LGracidaDIGIPROEntities1 context = new DL.LGracidaDIGIPROEntities1())
+                {
+                    var query = context.AlumnoGetMateriaNoAsignada(IdAlumno).ToList();
+                    result.Objects = new List<object>();
+
+                    if (query != null)
+                    {
+
+                        foreach (var obj in query)
+                        {
+                            ML.AlumnoMateria alumnomateria = new ML.AlumnoMateria();
+
+                            alumnomateria.materia = new ML.Materia();
+                            alumnomateria.materia.IdMateria = obj.IdMateria;
+                            alumnomateria.materia.Nombre = obj.Nombre;
+                            alumnomateria.materia.Costo = obj.Costo.Value;
+
+                            result.Objects.Add(alumnomateria);
+                            result.Correct = true;
+                        }
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                        result.ErrorMessage = "No se pudo realizar la consulta";
+                    }
+                }
+            }
             catch (Exception ex)
             {
                 result.Correct = false;

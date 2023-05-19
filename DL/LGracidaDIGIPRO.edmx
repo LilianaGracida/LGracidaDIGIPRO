@@ -72,6 +72,13 @@
         <Function Name="AlumnoGetMateriaNoAsignada" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdAlumno" Type="int" Mode="In" />
         </Function>
+        <Function Name="AlumnoMateriaAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdAlumno" Type="int" Mode="In" />
+          <Parameter Name="IdMateria" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AlumnoMateriaDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdAlumnoMateria" Type="int" Mode="In" />
+        </Function>
         <Function Name="AlumnoUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdAlumno" Type="int" Mode="In" />
           <Parameter Name="Nombre" Type="varchar" Mode="In" />
@@ -176,10 +183,17 @@
             <End Role="Materia" EntitySet="Materias" />
             <End Role="AlumnoMateria" EntitySet="AlumnoMaterias" />
           </AssociationSet>
-          <FunctionImport Name="AlumnoGetMateriaNoAsignada" ReturnType="Collection(LGracidaDIGIPROModel.AlumnoGetMateriaNoAsignada_Result)">
+          <FunctionImport Name="AlumnoGetMateriaAsignada" ReturnType="Collection(LGracidaDIGIPROModel.AlumnoGetMateriaAsignada_Result)">
           <Parameter Name="IdAlumno" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="AlumnoGetMateriaAsignada" ReturnType="Collection(LGracidaDIGIPROModel.AlumnoGetMateriaAsignada_Result)">
+          <FunctionImport Name="AlumnoMateriaAdd">
+            <Parameter Name="IdAlumno" Mode="In" Type="Int32" />
+            <Parameter Name="IdMateria" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AlumnoMateriaDelete">
+          <Parameter Name="IdAlumnoMateria" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AlumnoGetMateriaNoAsignada" ReturnType="Collection(LGracidaDIGIPROModel.AlumnoGetMateriaNoAsignada_Result)">
             <Parameter Name="IdAlumno" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
@@ -239,14 +253,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="AlumnoGetMateriaNoAsignada_Result">
-          <Property Type="Int32" Name="IdMateria" Nullable="false" />
-          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
-        </ComplexType>
         <ComplexType Name="AlumnoGetMateriaAsignada_Result">
           <Property Type="Int32" Name="IdMateria" Nullable="false" />
           <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="IdAlumnoMateria" Nullable="false" />
+          <Property Type="Int32" Name="IdAlumno" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="AlumnoGetMateriaNoAsignada_Result">
+          <Property Type="Int32" Name="IdMateria" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="Costo" Nullable="true" Precision="18" Scale="0" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -326,20 +342,24 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="AlumnoGetMateriaNoAsignada" FunctionName="LGracidaDIGIPROModel.Store.AlumnoGetMateriaNoAsignada">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="LGracidaDIGIPROModel.AlumnoGetMateriaNoAsignada_Result">
-                <ScalarProperty Name="IdMateria" ColumnName="IdMateria" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="AlumnoGetMateriaAsignada" FunctionName="LGracidaDIGIPROModel.Store.AlumnoGetMateriaAsignada">
             <ResultMapping>
               <ComplexTypeMapping TypeName="LGracidaDIGIPROModel.AlumnoGetMateriaAsignada_Result">
                 <ScalarProperty Name="IdMateria" ColumnName="IdMateria" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="IdAlumnoMateria" ColumnName="IdAlumnoMateria" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AlumnoMateriaAdd" FunctionName="LGracidaDIGIPROModel.Store.AlumnoMateriaAdd" />
+          <FunctionImportMapping FunctionImportName="AlumnoMateriaDelete" FunctionName="LGracidaDIGIPROModel.Store.AlumnoMateriaDelete" />
+          <FunctionImportMapping FunctionImportName="AlumnoGetMateriaNoAsignada" FunctionName="LGracidaDIGIPROModel.Store.AlumnoGetMateriaNoAsignada">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LGracidaDIGIPROModel.AlumnoGetMateriaNoAsignada_Result">
+                <ScalarProperty Name="IdMateria" ColumnName="IdMateria" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

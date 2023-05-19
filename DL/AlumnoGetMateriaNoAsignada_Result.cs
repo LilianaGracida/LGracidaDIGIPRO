@@ -15,5 +15,6 @@ namespace DL
     {
         public int IdMateria { get; set; }
         public string Nombre { get; set; }
+        public Nullable<decimal> Costo { get; set; }
     }
 }
