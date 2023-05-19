@@ -10,15 +10,11 @@
 namespace DL
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class AlumnoMateria
+    public partial class AlumnoGetMateriaAsignada_Result
     {
+        public int IdMateria { get; set; }
+        public string Nombre { get; set; }
         public int IdAlumnoMateria { get; set; }
-        public Nullable<int> IdAlumno { get; set; }
-        public Nullable<int> IdMateria { get; set; }
-    
-        public virtual Alumno Alumno { get; set; }
-        public virtual Materia Materia { get; set; }
     }
 }

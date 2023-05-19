@@ -63,6 +63,15 @@
     <Compile Include="AlumnoGetById_Result.cs">
       <DependentUpon>LGracidaDIGIPRO.tt</DependentUpon>
     </Compile>
+    <Compile Include="AlumnoGetMateriaAsignada_Result.cs">
+      <DependentUpon>LGracidaDIGIPRO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AlumnoGetMateriaNoAsignada_Result.cs">
+      <DependentUpon>LGracidaDIGIPRO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AlumnoMateria.cs">
+      <DependentUpon>LGracidaDIGIPRO.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion.cs" />
     <Compile Include="LGracidaDIGIPRO.Context.cs">
       <AutoGen>True</AutoGen>

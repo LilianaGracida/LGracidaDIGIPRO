@@ -6,7 +6,10 @@
     <edmx:Diagrams>
       <Diagram DiagramId="4a28bdf843fc481d9d95268c4586d9c9" Name="Diagram1">
         <EntityTypeShape EntityType="LGracidaDIGIPROModel.Alumno" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LGracidaDIGIPROModel.Materia" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LGracidaDIGIPROModel.Materia" Width="1.5" PointX="6.125" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="LGracidaDIGIPROModel.AlumnoMateria" Width="1.5" PointX="3.5" PointY="1.875" />
+        <AssociationConnector Association="LGracidaDIGIPROModel.FK__AlumnoMat__IdAlu__239E4DCF" />
+        <AssociationConnector Association="LGracidaDIGIPROModel.FK__AlumnoMat__IdMat__24927208" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -51,7 +51,7 @@ namespace PL.Controllers
         //public ActionResult Form(int? idAlumno)
         //{
         //    ML.Alumno alumno = new ML.Alumno();
-           
+
 
         //    //add o update
         //    if (idAlumno == null)
