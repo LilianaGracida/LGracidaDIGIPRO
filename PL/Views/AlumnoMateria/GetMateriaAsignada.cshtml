@@ -40,7 +40,11 @@
             </div>
 
             <br />
-
+            <div class="form-group col-md-12">
+                <div class="text-right">
+                    <a class="btn btn-success" href="@Url.Action("GetMateriaSinAsignar", "AlumnoMateria",Model.alumno)"> Agregar</a>
+                </div>
+            </div>
             <div class="row" style="padding-top:30px">
                 <div class="col-md-12">
                     <table class="table table-bordered">
@@ -51,9 +55,7 @@
                             <th class="text-center " scope="col">
                                 Nombre
                             </th>
-                            <th class="text-left" scope="col">
-                                Costo
-                            </th>
+                            
                         </tr>
                         @foreach (ML.AlumnoMateria alumnomateria in Model.AlumnoMaterias)
                         {

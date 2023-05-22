@@ -30,8 +30,6 @@ namespace PL.Controllers
 
             return View(alumnomateria);
         }
-
-        
         [HttpPost]
         public ActionResult GetMateriaAsignada(ML.AlumnoMateria alumnomateria)
         {
@@ -57,7 +55,6 @@ namespace PL.Controllers
             }
             return PartialView("Modal");
         }
-
         [HttpGet]
         public ActionResult GetMateriaSinAsignar(int IdAlumno)
         {
@@ -72,7 +69,6 @@ namespace PL.Controllers
             return View(alumnomateria);
         }
         [HttpPost]
-
         public ActionResult GetMateriaSinAsignar(ML.AlumnoMateria alumnomateria)
         {
             ML.Result result = new ML.Result();
@@ -101,5 +97,7 @@ namespace PL.Controllers
             }
             return PartialView("Modal");
         }
+        
+       
     }
-    }
+}
